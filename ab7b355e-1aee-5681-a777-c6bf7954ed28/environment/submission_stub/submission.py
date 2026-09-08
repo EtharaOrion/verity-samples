@@ -1,0 +1,144 @@
+"""Seed submission.
+
+This is a working training algorithm, not an empty stub. It runs to completion, produces a well-formed
+evaluation log, and satisfies every conformance check the task declares. What it is bad at is the graded
+axis: it converges slowly, so it does not reach the validation target inside the budget.
+
+It is here to be improved. The reward scale is anchored so that a reward of zero means you did not improve
+on what you were handed, rather than meaning you produced nothing.
+
+Only the functions defined below may exist at module level, alongside imports and constants. See the
+vendored upstream documentation for the full submission contract.
+"""
+
+from typing import Any, Dict, Iterator, List, Optional, Tuple
+
+import torch
+
+from algoperf import spec
+
+_BATCH_SIZE = 64
+_PEAK_LEARNING_RATE = 0.05
+_FLOOR_LEARNING_RATE = 0.002
+_HORIZON_STEPS = 20000
+_DECAY_ONSET_FRACTION = 0.9
+_MOMENTUM = 0.0
+_WEIGHT_DECAY = 0.0
+
+
+def _scheduled_rate(step: int) -> float:
+    """The learning rate at a given step: the peak rate, then a linear ramp to the floor over the tail."""
+    progress = min(max(float(step), 0.0) / float(_HORIZON_STEPS), 1.0)
+    if progress < _DECAY_ONSET_FRACTION:
+        return _PEAK_LEARNING_RATE
+    tail = (progress - _DECAY_ONSET_FRACTION) / (1.0 - _DECAY_ONSET_FRACTION)
+    return _PEAK_LEARNING_RATE + tail * (_FLOOR_LEARNING_RATE - _PEAK_LEARNING_RATE)
+
+
+def get_batch_size(workload_name: str) -> int:
+    """Return the training batch size.
+
+    A single value that works across every workload is what the rules allow. Selecting a value by
+    identifying the workload is not.
+    """
+    del workload_name
+    return _BATCH_SIZE
+
+
+def init_optimizer_state(
+    workload: spec.Workload,
+    model_params: spec.ParameterContainer,
+    model_state: spec.ModelAuxiliaryState,
+    hyperparameters: spec.Hyperparameters,
+    rng: spec.RandomState,
+) -> spec.OptimizerState:
+    """Stochastic gradient descent driven by a scheduled step size.
+
+    The schedule holds the peak rate across the great majority of its horizon and spends the last tenth
+    ramping down to the floor, so the large steps that explore come first and the small steps that settle
+    come at the end.
+    """
+    del workload
+    del model_state
+    del hyperparameters
+    del rng
+    optimizer = torch.optim.SGD(
+        model_params.parameters(),
+        lr=_PEAK_LEARNING_RATE,
+        momentum=_MOMENTUM,
+        weight_decay=_WEIGHT_DECAY,
+    )
+    return {"optimizer": optimizer, "step": 0}
+
+
+def update_params(
+    workload: spec.Workload,
+    current_param_container: spec.ParameterContainer,
+    current_params_types: spec.ParameterTypeTree,
+    model_state: spec.ModelAuxiliaryState,
+    hyperparameters: spec.Hyperparameters,
+    batch: Dict[str, spec.Tensor],
+    loss_type: spec.LossType,
+    optimizer_state: spec.OptimizerState,
+    eval_results: List[Tuple[int, float]],
+    global_step: int,
+    rng: spec.RandomState,
+) -> Tuple[spec.OptimizerState, spec.ParameterContainer, spec.ModelAuxiliaryState]:
+    """One training step, at whatever rate the schedule asks for at this point in the horizon."""
+    unused = (current_params_types, hyperparameters, eval_results, global_step)
+    del unused
+
+    sgd = optimizer_state["optimizer"]
+    rate = _scheduled_rate(optimizer_state["step"])
+    for group in sgd.param_groups:
+        group["lr"] = rate
+
+    current_param_container.train()
+    sgd.zero_grad()
+
+    outputs = workload.model_fn(
+        params=current_param_container,
+        augmented_and_preprocessed_input_batch=batch,
+        model_state=model_state,
+        mode=spec.ForwardPassMode.TRAIN,
+        rng=rng,
+        update_batch_norm=True,
+    )
+    predictions, next_state = outputs
+
+    losses = workload.loss_fn(
+        label_batch=batch["targets"],
+        logits_batch=predictions,
+        mask_batch=batch.get("weights"),
+        label_smoothing=0.0,
+    )
+    mean_loss = losses["summed"] / losses["n_valid_examples"]
+    mean_loss.backward()
+    sgd.step()
+
+    optimizer_state["step"] += 1
+    return optimizer_state, current_param_container, next_state
+
+
+def data_selection(
+    workload: spec.Workload,
+    input_queue: Iterator[Dict[str, spec.Tensor]],
+    optimizer_state: spec.OptimizerState,
+    current_param_container: spec.ParameterContainer,
+    model_state: spec.ModelAuxiliaryState,
+    hyperparameters: spec.Hyperparameters,
+    global_step: int,
+    rng: spec.RandomState,
+) -> Dict[str, spec.Tensor]:
+    """Take the next batch off the queue, unchanged."""
+    unused = (
+        workload,
+        optimizer_state,
+        current_param_container,
+        model_state,
+        hyperparameters,
+        global_step,
+        rng,
+    )
+    del unused
+    return next(input_queue)

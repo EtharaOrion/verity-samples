@@ -1,0 +1,144 @@
+version = "1.3"
+
+# Verity-specific fields live under [metadata], which the vendored Harbor models as a free-form mapping.
+# The [environment], [agent], and [verifier] tables carry only Harbor TaskConfig schema fields, so this
+# manifest loads under a strict Harbor loader rather than only under a permissive one.
+#
+# solution/solve.sh and tests/test.sh are discovered by convention and are not declared here.
+
+artifacts = [
+    { source = "/submission/submission.py" },
+    { source = "/logs/runs", exclude = ["**/checkpoint*"] },
+    { source = "/logs/verifier" },
+]
+
+[task]
+name = "ethara/verity-mnist_fine_grained-selftuning-ar9"
+description = "Replace a deliberately weak MNIST handwritten-digit classification training algorithm with one that reaches the declared bar as early in its wall-clock budget as possible, under eighteen compiled upstream conformance rules and 2 perturbation runs whose parameters are withheld."
+keywords = ["algoperf", "training-algorithms", "optimization", "bounded-continuous", "conformance"]
+
+[metadata]
+suite = "verity"
+batch = "batch-1"
+# Derived from the slot record, never asserted. These three lines were hardcoded to the shakedown values
+# while seed/emit.py wrote the opposite into seed/batch.yaml, and nothing cross-checked the two writers, so
+# twenty delivery bundles shipped bytes claiming a section 12.4 exemption they did not hold and passed
+# Phase 2 doing it. The key is EMITTED even when false: emit.py records that a reader who finds no
+# shakedown key cannot distinguish a delivery batch from a manifest that forgot to say.
+shakedown = false
+slot_id = "M20"
+archetype = "AR9"
+archetype_name = "Temporal-Reasoning Gap"
+durable_failure_mode = "temporal-revision-survival"
+# TWENTY SLOTS ARE NOT TWENTY DESIGNS. Slots sharing a workload, ruleset, perturbation set and submission
+# stub differ only in a perturbation's RNG draw, which makes them replicates of one design: legitimate,
+# because replicates are how variance is estimated, and misleading only when a corpus counts them as
+# separate designs. All three keys are EMITTED even at replicate_count = 1, for the reason the shakedown
+# line above gives: a reader who finds no key cannot tell a design from a manifest that forgot to say.
+design_id = "fcc4ba8a99ff"
+replicate_index = 1
+replicate_count = 1
+tier = "Baseline"
+tier_is_authoring_intent = true
+harness_commit = "966bbfbcc0b6a33e7af5e670433ab5f4d84ad83a"
+harbor_commit = "f78dd6854d99ba7cbf9f00649a4e85ce5d99046f"
+workload = "mnist_fine_grained"
+workload_in_scope_under_section_1 = true
+framework = "pytorch"
+tuning_ruleset = "self"
+graded_axis = "wall_clock_sec"
+threshold_provenance = "workload_class"
+anchors_measured = false
+maturity = "draft"
+enters_samples = false
+reaches_a_pilot = false
+disposition_ceiling = "HOLD:PILOT_REQUIRED"
+tags = ["optimization", "bounded-continuous"]
+attribution = "Built on MLCommons AlgoPerf: Training Algorithms, Apache-2.0. No Verity number is an AlgoPerf result and no MLCommons endorsement is implied."
+
+[environment]
+# The AGENT image, not the graded one, and the two differ on purpose. This read `{image}` -- the
+# graded image -- which carries no mini-swe-agent and no uv, so Harbor installed the agent tooling
+# over the network at trial start. Under --seal-agent there is no external DNS, so the install
+# reached for astral.sh and every trial died before the agent ran: NO bundle could run sealed as
+# authored. The agent image carries the tooling and NOT the held-out variant classes, because the
+# perturbation identity is the sharpest private carrier under thresholds section 8. The verifier
+# keeps the full graded image below, because the graded runs and the calibration run both need the
+# dataset and the variants. Pinned by digest, never by tag.
+docker_image = "verity-algoperf@sha256:dc481817e6ee6034e9f3c9400de3b6d8ce32146a8351931e63eabae4bf9210d5"
+build_timeout_sec = 3600.0
+# ZERO, and the device still reaches the container. Harbor's Docker backend declares no GPU
+# capability -- `compose_env.py` does not override `capabilities`, so it inherits the base default
+# where `gpus` is False -- and `environments/base.py:613 _validate_gpu_support` REFUSES a non-zero
+# request before any container starts. Every bundle this generator emitted carried 1 and none of
+# them could run. The device is granted instead by the orchestrator's compose overlay at
+# `scripts/orchestrator/device.py`, which is the same `extra_docker_compose` seam the host-gateway
+# alias and the sealed network already use. gpu_types stays as the declaration of what the task
+# needs; it is documentation rather than a request.
+gpus = 0
+gpu_types = ["H100"]
+memory_mb = 131072
+storage_mb = 16384
+network_mode = "public"
+
+[agent]
+# A BACKSTOP against a phase ending mid-edit, not a share of the episode and not a target. The value is
+# NOT ceiling/attempts: section 12.5 rejects that reading outright, because the client's cap is a
+# disjunction -- N attempts OR the timeout -- and "a disjunction is a stopping condition, not a budget to
+# divide". The comment that stood here derived 28800/10 and was the misreading itself.
+#
+# It is chosen instead so that the section 12.5 CEILING gate holds at this substrate's measured turn cost:
+#   8 * (1800 + 638.9 + 145) = 20671 <= 21600
+# where the verifier term is the n = 2 median-of-3 graded shape priced at each unit's own C = 4 * t_ref
+# with the section 12.1 overhead, and 145 s is the measured gap between the end of one agent
+# phase and the next launch. That admits 8 attempts against a K_min floor of 8.
+#
+# The figure is WITHHELD from instruction.md. Across the seven charged turns of ep-sbx2 every agent phase
+# self-terminated between 1359 s and 1751 s against a cap that was never reached, so this bound does not
+# bind on the available evidence. Any figure stated to the agent is one the agent can pace against, which
+# makes an announced bound a behavioural input rather than a safety limit, and an attempt that paces itself
+# to the backstop spends the very budget the K_min floor exists to protect.
+timeout_sec = 1800.0
+# PUBLIC in the manifest, sealed at run time, and the two are not in conflict. The reasoning that put
+# "no-network" here was right about the threat and wrong about the mechanism: reachable egress does let
+# a solver fetch upstream AlgoPerf material, and the AR9 slots grade precisely the gap between the
+# published form a model recites and the value the pinned code applies. But a declared policy that
+# differs from the [environment] baseline asks Harbor for a post-start network switch the Docker
+# backend cannot perform, so it refused the trial and the bundle never ran at all. A seal that stops
+# the task from starting protects nothing.
+#
+# The mechanism that works is `--seal-agent`, which the orchestrator passes at launch: it puts the
+# agent on an internal network reaching only the solver proxy, at the network layer, without changing
+# the declared policy. See `scripts/orchestrator/hostaccess.py`. The declaration stays public because
+# that is what the baseline is; the seal is applied to the running container.
+network_mode = "public"
+
+[verifier]
+timeout_sec = 500.0
+environment_mode = "separate"
+network_mode = "no-network"
+
+# REQUIRED, and its absence is why no emitted bundle could run. Without this table Harbor derives the
+# separate verifier environment's baseline from [environment], which is public, while
+# [verifier].network_mode above is no-network. Those differ, so Harbor asks for the same post-start
+# network switch the Docker backend cannot perform and refuses the trial. Declaring the block makes the
+# verifier environment's own baseline no-network, so nothing has to change after start.
+#
+# The verifier keeps the FULL image: the graded runs and the calibration run both need the dataset and
+# the held-out variant classes, which is exactly what the agent phase must not have.
+[verifier.environment]
+# A TAG here, where every other image reference in this manifest is a digest, and the exception is
+# forced rather than chosen. Harbor sets skip_tests_upload=True for environment_mode = "separate" and
+# then expects the image to already own /tests/test.sh (harbor verifier/verifier.py:91-96): it uploads
+# nothing, so the bundle's own tests/test.sh never reaches the container and the image must carry it.
+# An image that carries this bundle cannot be named here by digest, because writing the digest into
+# this file changes the bundle bytes, which changes the content-derived uuid, which makes the image's
+# baked copy stale. The tag breaks that cycle by being stable across rebuilds.
+#
+# The cost is that a tag is mutable: rebuilding it mid-episode regrades the remaining turns under new
+# rules with no recorded boundary. Rebuild only on a clean episode boundary.
+docker_image = "verity-algoperf:verifier-mnist-fine-grained"
+network_mode = "no-network"
+gpus = 0
+memory_mb = 131072
+storage_mb = 16384

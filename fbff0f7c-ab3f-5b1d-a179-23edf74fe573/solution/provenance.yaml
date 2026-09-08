@@ -1,0 +1,79 @@
+ancestry_attestation_digest: null
+ancestry_attestation_signer: null
+applicability:
+  empty_submission_validation: applicable
+  exclusion_base_commit_sha: applicable
+  exclusion_canonical_repository_identity: applicable
+  exclusion_fork_ancestry_closure: applicable
+  freeze_holdout: applicable
+  near_duplicate_screening: applicable
+  per_unit_provenance: applicable
+  sanitization: applicable
+atom_result_digests:
+  empty_submission_validation: "sha256:a3790923b5259b527ea65e5cc9741f2c078c95340588de0c6e6a0ccdce4903ff"
+  exclusion_matching: "sha256:ab9b253d77fa106a7cbf2988a3210b5f55d582a41ae1d7b894ab05c2ea3877e1"
+  freeze_holdout: "sha256:bc0a35c79d5c5544b793791a13b0d4beddc356e9db51f8b55576b33f96d75f29"
+  near_duplicate_screening: "sha256:e4535be3860309ddff04d39a000fb6009d46ad38561365612965467301418726"
+  sanitization: "sha256:2473cb25fc38ef59691dd9ae94f662b52f8609b71d3cb3ea2c2641e4ac2652f5"
+attestation_state: "attestation-unavailable"
+authority_mode: union
+banner: "GENERATED SECTION. DO NOT HAND-EDIT."
+base_commit_sha: 966bbfbcc0b6a33e7af5e670433ab5f4d84ad83a
+canary_block: "VERITY-CANARY-BLOCK-BEGIN\n0 VERITY-CANARY-3A7DDCF5A4A7E6BC8CD90DBEEEC43B26\n1 VERITY-CANARY-FC69F0065A00EE38C876B5A9B18D5272\n2 VERITY-CANARY-B30E7B5760079BA22CB03F642887C7DC\n3 VERITY-CANARY-E65FF434EB034470E0BDEAD17703F912\nVERITY-CANARY-BLOCK-END"
+canary_domain_version: v2
+canonical_repository_identity: "github.com/mlcommons/algorithmic-efficiency"
+empty_submission_result: unrun
+event_attestation_digest: null
+event_attestation_signer: null
+fork_ancestry_digest: "sha256:2ca7b22e7581615a22ce6638b0f5b402a33e38cb730fc91c0f1c07f7c36b865d"
+generated_by: solution/recompute.py
+instrument_versions:
+  forge_contract: 1.0.0
+  recompute: 2.0.0
+  verity_verifier: 1.1.0
+origin: derived
+provenance_date: "2026-02-07"
+resolved_sanitization_closure: unbound
+schema_version: 1.0.0
+screening_expires_at: "2027-02-08T00:00:00Z"
+screening_interval_days: 180
+screening_measured_at: "2026-08-12T00:00:00Z"
+screening_roots:
+  - digest: "sha256:ef8de61bb3de379b0c2e84ba23e8f7819ddf7b66ec57b617a5aca2f93d1ce384"
+    id: "exclusion-list"
+    identity: "verity-exclusion-list-v1"
+    resolvable: true
+  - digest: "sha256:71596541b57ac52abf25c71fc2bc06b322c85e76e47411ffe9930fce794f9f5e"
+    id: "freeze-date-table"
+    identity: "verity-freeze-date-table-v1"
+    resolvable: true
+  - digest: "sha256:5d7b45d3783bf1be1943235627069b0c8d51c2964fd429a1a8fca83436e2d1e7"
+    id: "source-attestation"
+    identity: "github-attestation-trust-root"
+    resolvable: true
+  - digest: null
+    id: "near-duplicate-index"
+    identity: null
+    resolvable: false
+source_kind: public_repository
+task_generating_event_timestamp: "2026-04-03T02:25:13Z"
+task_id: "verity-mnist_fine_grained-selftuning-ar7"
+upstream_identity: MLCommons AlgoPerf Training Algorithms
+upstream_license: "Apache-2.0"
+upstream_modifications:
+  - Reduced execution path. The mnist_fine_grained workload is pinned and requirements section 1 excludes it from the corpus; section 12.4 admits it for a shakedown.
+  - "Self-tuning ruleset pinned as the primary."
+  - "Budget axis retained but re-anchored. The graded axis is accumulated submission time in seconds, as upstream measures it, read against the budget the runner enforces for the declared ruleset rather than against the upstream time-to-result normalisation."
+  - "Reward replaced. A bounded continuous scalar with a conjunctive task-pass predicate replaces the upstream performance-profile integral."
+  - "Scoring path replaced. The verifier parses eval_measurements.csv directly and never calls scoring/score_submissions.py, which does not execute under the harness's own pinned NumPy floor."
+  - Conformance rules compiled. Upstream prose rules are compiled into eighteen deterministic checks over the submitted bytes and the recorded log.
+  - Perturbation set added. Two graded conjuncts with no upstream counterpart.
+  - "Per-step cost ceiling added. The upstream benchmark states no ratio bound on per-step compute."
+upstream_version: 1.0.0
+# BINDING BLOCK BELOW. EXCLUDED FROM canonical_content_hash.
+binding:
+  canonical_bundle_hash: 08ee013e26877a4d2a6029c7c357d25d0654677c6fa2192ad9f100aae4e4747d
+  canonical_payload_hash: sha256:37f1a307ac591fa5668eab5a47f671cc648951b64dca79b4dcbe5d74eaf78a0c
+  pinned_image_digest: verity-algoperf@sha256:e3bd3156e388c84ba8f2909dc757042c01e18a52b2dfbeb6a350f2b5e6c26a05
+  canary_domain_version: v2
+  binding_envelope: detached, at solution/provenance.sig

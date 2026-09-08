@@ -1,0 +1,17 @@
+{
+  "learning_rate": {
+    "max": 0.005,
+    "min": 0.0005,
+    "scaling": "log"
+  },
+  "warmup_steps": {
+    "max": 400,
+    "min": 100,
+    "scaling": "linear"
+  },
+  "weight_decay": {
+    "max": 0.05,
+    "min": 0.001,
+    "scaling": "log"
+  }
+}

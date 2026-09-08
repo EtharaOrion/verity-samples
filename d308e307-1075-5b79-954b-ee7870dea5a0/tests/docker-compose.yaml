@@ -1,0 +1,14 @@
+# Grants the separate verifier environment a device and supplies the bundle tree.
+# See seed/scaffold.py:verifier_compose_for.
+services:
+  main:
+    volumes:
+      - ../:/bundle:ro
+      - ./:/tests:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
