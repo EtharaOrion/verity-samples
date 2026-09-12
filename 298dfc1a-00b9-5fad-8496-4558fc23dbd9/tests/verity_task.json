@@ -10,7 +10,7 @@
   "harness": {
     "submodule_commit": "966bbfbcc0b6a33e7af5e670433ab5f4d84ad83a",
     "tree_digest": "sha256:274ecb3de2fef51cf8cdad9afe94a75322f4401c974073df74364cb4135c9212",
-    "image": "verity-algoperf@sha256:0988386c4fb8b3d0a5de3e708a63ddc1057387618e43d341a6d1bd453f29bec5",
+    "image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/verity@sha256:0988386c4fb8b3d0a5de3e708a63ddc1057387618e43d341a6d1bd453f29bec5",
     "docs_digest": "sha256:1f29455e1a5e7c6b3df7cfcbf5bcc0715073cff61a60f17ff0ba623be96fed09",
     "framework": "pytorch"
   },

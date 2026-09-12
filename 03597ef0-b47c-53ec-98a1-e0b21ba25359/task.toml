@@ -65,7 +65,7 @@ attribution = "Built on MLCommons AlgoPerf: Training Algorithms, Apache-2.0. No 
 # perturbation identity is the sharpest private carrier under thresholds section 8. The verifier
 # keeps the full graded image below, because the graded runs and the calibration run both need the
 # dataset and the variants. Pinned by digest, never by tag.
-docker_image = "verity-algoperf@sha256:dc481817e6ee6034e9f3c9400de3b6d8ce32146a8351931e63eabae4bf9210d5"
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/verity@sha256:dc481817e6ee6034e9f3c9400de3b6d8ce32146a8351931e63eabae4bf9210d5"
 build_timeout_sec = 3600.0
 # ZERO, and the device still reaches the container. Harbor's Docker backend declares no GPU
 # capability -- `compose_env.py` does not override `capabilities`, so it inherits the base default
@@ -137,7 +137,7 @@ network_mode = "no-network"
 #
 # The cost is that a tag is mutable: rebuilding it mid-episode regrades the remaining turns under new
 # rules with no recorded boundary. Rebuild only on a clean episode boundary.
-docker_image = "verity-algoperf:verifier-mnist-fine-grained"
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/verity@sha256:a9e2e021a458b56068fa57b2289851ec445f02d630906d3eecc78af4854819d1"
 network_mode = "no-network"
 gpus = 0
 memory_mb = 131072
