@@ -1,150 +1,166 @@
-<div align="center">
+<p align="center"><img src="images/hero.svg" alt="Verity" width="720"></p>
 
-# [verity-samples](#contact)
+# Verity: samples
 
-## [Abstract](#contact)
+<p align="center"><b>The samples lane: 30 of 30 Harbor task bundles.</b></p>
 
-This repository is the delivery surface of the Verity corpus. It holds authored task bundles in the Harbor format, one directory per task, each named by a content-derived UUID. A bundle carries everything a run pins, everything it grades, and everything it forbids: a manifest, the agent-visible instruction, a container environment holding the seed submission, a verifier tree that grades the submitted bytes, and a private solution tree holding the reference submission and its derivation record.
+<p align="center"><a href="#summary"><img src="https://img.shields.io/badge/bundles-30_of_30-845EF7" alt="bundles: 30 of 30"></a> <a href="#evidence-status"><img src="https://img.shields.io/badge/sealed-0-845EF7" alt="sealed: 0"></a> <a href="#difficulty-tiers"><img src="https://img.shields.io/badge/difficulty-measured-845EF7" alt="difficulty: measured"></a></p>
 
-Thirty bundles are present at this revision, each a distinct design across two upstream workloads and five archetypes. Every one of them is self-contained and reviewable from the outside: the manifest and the run specification together state the full contract, and no grading behaviour lives only in verifier code.
+<p align="center"><sub><a href="#abstract">Abstract</a> | <a href="#summary">Summary</a> | <a href="#difficulty-tiers">Difficulty tiers</a> | <a href="#evidence-status">Evidence status</a> | <a href="#coverage">Coverage</a> | <a href="#dataset-structure">Dataset structure</a> | <a href="#verification-and-quality-assurance">Verification and quality assurance</a> | <a href="#reproduction">Reproduction</a> | <a href="#cite">Cite</a> | <a href="#license">License</a> | <a href="#contact">Contact</a></sub></p>
 
-## [Summary](#contact)
+## Abstract
 
-| Property                   | Value                                                                       |
-| -------------------------- | --------------------------------------------------------------------------- |
-| Bundles                    | 30                                                                          |
-| Delivery format            | Harbor bundle manifest, version 1.3                                         |
-| Substrate                  | MLCommons AlgoPerf: Training Algorithms, vendored and pinned                |
-| Framework                  | PyTorch, on all 30                                                          |
-| Tuning ruleset             | Self-tuning, on all 30                                                      |
-| Workloads                  | `mnist_fine_grained` and `cifar`                                        |
-| Archetypes                 | 5, spanning 4 durable failure modes                                         |
-| Graded axis                | Accumulated submission time in seconds at the qualifying evaluation         |
-| Conformance rules          | 18, compiled from upstream prose into deterministic checks                  |
-| Graded runs per submission | 3, all conjuncts, plus a seed anchor run                                    |
-| Pass predicate             | Conjunctive over rule conformance, metric threshold, and every perturbation |
-| Reward                     | Continuous in the closed interval 0 to 1, separate from the pass            |
-| Declared tier              | Baseline                                                                    |
+The curated lane of this corpus: at most 30 Harbor task bundles, every anchor seated first and every other bundle in seal order. Bundles past that ceiling live in `delivery/`.
 
-## [Coverage](#contact)
+Each bundle is one Harbor task in a directory named by its content-derived uuid5, so the name doubles as an integrity check. This page is rendered from the resident bundles on every reconcile; a value a bundle does not carry reads `absent`, and the page never fills one in.
 
-Two upstream workloads are represented across five archetypes.
+## Summary
 
-| Archetype                         | `mnist_fine_grained` | `cifar`   | Total        |
-| --------------------------------- | ---------------------- | ----------- | ------------ |
-| AR1 Long-Horizon State Collapse   | 4                      | 3           | 7            |
-| AR3 Tool-Chaining Brittleness     | 3                      | 1           | 4            |
-| AR6 Silent-Execution Failures     | 4                      | 2           | 6            |
-| AR7 Ambiguous Intermediate States | 4                      | 2           | 6            |
-| AR9 Temporal-Reasoning Gap        | 7                      | 0           | 7            |
-| **Total**                   | **22**           | **8** | **30** |
+| Property | Value |
+| --- | --- |
+| Bundles | 30 of 30 |
+| Sealed | 0 of 30 |
+| Registrations | unregistered (30) |
+| Audit verdicts | none (30) |
+| Harbor schema | absent (30) |
 
-Each bundle also names the durable failure mode it is built to provoke, which is the property that has to survive the perturbation runs rather than merely appear once.
+## Difficulty tiers
 
-| Durable failure mode           | Bundles |
-| ------------------------------ | ------- |
-| `silent-change-survival`     | 10      |
-| `chained-precision-survival` | 7       |
-| `temporal-revision-survival` | 7       |
-| `backend-writeback-survival` | 6       |
+Difficulty is measured by the signed pilot alone and never declared in a bundle, so this page states no tier a bundle claims.
 
-Every bundle sets `replicate_count = 1` and carries a distinct `design_id`, so the thirty directories are thirty distinct designs rather than replicates of a smaller set. Slot identifiers are unique, 22 in the `M` series and 8 in the `C` series.
+## Evidence status
 
-## [Bundle structure](#contact)
+The verdict is the audit outcome recorded at the sealed digest, and `none` means no verdict has landed for that digest yet. Only an authoring run removes a bundle from this lane, so removal waits for the next one.
 
-[The layout is uniform across all 30 bundles.](#contact)
+| uuid | Verdict | Sealed digest | Stream |
+| --- | --- | --- | --- |
+| 03597ef0-b47c-53ec-98a1-e0b21ba25359 | none | absent | none |
+| 0809fcd2-af7b-5bc8-aa55-5b02b7a9e874 | none | absent | none |
+| 198555d0-7868-5d6b-a141-99bb917af89a | none | absent | none |
+| 278c3877-da79-57e3-ad0a-ed3786751493 | none | absent | none |
+| 298dfc1a-00b9-5fad-8496-4558fc23dbd9 | none | absent | none |
+| 43edd11e-f330-5557-adec-eccc7afa03fc | none | absent | none |
+| 5a6c8a34-c444-5b19-93da-05abad76075b | none | absent | none |
+| 5bafb40e-bccc-5ea2-89c7-34f7c81849d9 | none | absent | none |
+| 86f297e7-8883-56d8-8fd0-7fafcdcd5a63 | none | absent | none |
+| 9585bb37-07a0-53a4-802c-8ab3754ff608 | none | absent | none |
+| 983a1cd1-be81-568f-8f37-4ca98d3b791f | none | absent | none |
+| 9e40e442-b491-5d73-b2d3-b848290d01bc | none | absent | none |
+| 9fdd9718-bd4b-5f8f-831b-ff501a01c000 | none | absent | none |
+| a15faad2-0017-5818-b05c-3340c53dfae9 | none | absent | none |
+| ab7b355e-1aee-5681-a777-c6bf7954ed28 | none | absent | none |
+| b2e18fe9-c91e-5bd2-8f1d-67900d582bc0 | none | absent | none |
+| b515061d-e187-5f6c-b28b-3c8aac0507bc | none | absent | none |
+| b5bceb71-0380-5dcc-8665-8e50ab2849b2 | none | absent | none |
+| b785b44e-dcb4-526d-b286-3d0bee22c28f | none | absent | none |
+| b80d5e2b-6d36-5c08-98ca-0e365204eadc | none | absent | none |
+| bc86a5d0-7dbd-5196-8b4b-70f616684513 | none | absent | none |
+| c2a86c28-7a6d-5455-b462-ae744aec1aec | none | absent | none |
+| c44186bc-8349-59e9-8706-41098106b5f5 | none | absent | none |
+| cb70623c-50fe-507a-8732-605fd8d6d0eb | none | absent | none |
+| d308e307-1075-5b79-954b-ee7870dea5a0 | none | absent | none |
+| d6361f41-c550-5c44-998d-67f92cf0bba3 | none | absent | none |
+| dc900317-ebb1-54d7-848f-15493ad88d19 | none | absent | none |
+| f1314171-6866-5dd3-9917-83576740520f | none | absent | none |
+| fbff0f7c-ab3f-5b1d-a179-23edf74fe573 | none | absent | none |
+| fc4fdf5c-418b-5f13-ae89-bb0a4713b323 | none | absent | none |
 
-| Path                                                                         | Role                                                                                                                                                                                                                                                                                        |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `task.toml`                                                                | Harbor manifest, version 1.3. Carries`[task]`, `[metadata]`, `[environment]`, `[agent]`, `[verifier]`, and `[verifier.environment]`. Every Verity field lives in `[metadata]`, which Harbor treats as a free-form mapping, so the manifest loads under a strict Harbor loader |
-| `instruction.md`                                                           | The only agent-visible prose in the bundle                                                                                                                                                                                                                                                  |
-| `environment/Dockerfile`                                                   | The agent image build                                                                                                                                                                                                                                                                       |
-| `environment/submission_stub/submission.py`                                | The working baseline the agent is handed and must beat: plain SGD at a small fixed rate, with no momentum, adaptivity, or schedule                                                                                                                                                          |
-| `tests/test.sh`                                                            | Verifier entrypoint, executed inside the verifier environment                                                                                                                                                                                                                               |
-| `tests/verity_task.json`                                                   | The run specification: objective, perturbations, conformance set, submission surface, and upstream provenance                                                                                                                                                                               |
-| `tests/verity_verifier/`                                                   | The committed checkers, as`main`, `rules`, `reward`, `redline`, `parse`, `runchecks`, and `spec`                                                                                                                                                                              |
-| `tests/rubrics.jsonl`, `tests/select_trial.py`, `tests/test_output.py` | Rubric carrier, trial selection, and output assertions                                                                                                                                                                                                                                      |
-| `solution/`                                                                | Private. Reference submission,`solve.sh`, generated `TRUTH.md`, `grounding.yaml`, `recompute.py`, provenance pair, rubrics, and a tuning search space in 15 of the 30                                                                                                               |
+## Coverage
 
-The manifest declares three collected artifacts: the submitted `/submission/submission.py`, the run logs under `/logs/runs` excluding checkpoints, and the verifier output under `/logs/verifier`.
+| Keyword | Bundles |
+| --- | --- |
+| algoperf | 30 |
+| bounded-continuous | 30 |
+| conformance | 30 |
+| optimization | 30 |
+| training-algorithms | 30 |
 
-## [Why it is hard](#contact)
+## Dataset structure
 
-Five properties compose, and each one closes a route that would otherwise be shorter than solving the task.
+| Bundle | Task | Keywords | Registration | Sealed at | Tier |
+| --- | --- | --- | --- | --- | --- |
+| [`03597ef0-b47c-53ec-98a1-e0b21ba25359`](03597ef0-b47c-53ec-98a1-e0b21ba25359/) | `ethara/verity-mnist_fine_grained-selftuning-ar9` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`0809fcd2-af7b-5bc8-aa55-5b02b7a9e874`](0809fcd2-af7b-5bc8-aa55-5b02b7a9e874/) | `ethara/verity-mnist_fine_grained-selftuning-ar9` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`198555d0-7868-5d6b-a141-99bb917af89a`](198555d0-7868-5d6b-a141-99bb917af89a/) | `ethara/verity-mnist_fine_grained-selftuning-ar7` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`278c3877-da79-57e3-ad0a-ed3786751493`](278c3877-da79-57e3-ad0a-ed3786751493/) | `ethara/verity-mnist_fine_grained-selftuning-ar6` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`298dfc1a-00b9-5fad-8496-4558fc23dbd9`](298dfc1a-00b9-5fad-8496-4558fc23dbd9/) | `ethara/verity-mnist_fine_grained-selftuning-ar3` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`43edd11e-f330-5557-adec-eccc7afa03fc`](43edd11e-f330-5557-adec-eccc7afa03fc/) | `ethara/verity-cifar-selftuning-ar7` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`5a6c8a34-c444-5b19-93da-05abad76075b`](5a6c8a34-c444-5b19-93da-05abad76075b/) | `ethara/verity-mnist_fine_grained-selftuning-ar6` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`5bafb40e-bccc-5ea2-89c7-34f7c81849d9`](5bafb40e-bccc-5ea2-89c7-34f7c81849d9/) | `ethara/verity-cifar-selftuning-ar1` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`86f297e7-8883-56d8-8fd0-7fafcdcd5a63`](86f297e7-8883-56d8-8fd0-7fafcdcd5a63/) | `ethara/verity-cifar-selftuning-ar6` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`9585bb37-07a0-53a4-802c-8ab3754ff608`](9585bb37-07a0-53a4-802c-8ab3754ff608/) | `ethara/verity-mnist_fine_grained-selftuning-ar3` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`983a1cd1-be81-568f-8f37-4ca98d3b791f`](983a1cd1-be81-568f-8f37-4ca98d3b791f/) | `ethara/verity-mnist_fine_grained-selftuning-ar9` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`9e40e442-b491-5d73-b2d3-b848290d01bc`](9e40e442-b491-5d73-b2d3-b848290d01bc/) | `ethara/verity-mnist_fine_grained-selftuning-ar9` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`9fdd9718-bd4b-5f8f-831b-ff501a01c000`](9fdd9718-bd4b-5f8f-831b-ff501a01c000/) | `ethara/verity-mnist_fine_grained-selftuning-ar7` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`a15faad2-0017-5818-b05c-3340c53dfae9`](a15faad2-0017-5818-b05c-3340c53dfae9/) | `ethara/verity-mnist_fine_grained-selftuning-ar3` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`ab7b355e-1aee-5681-a777-c6bf7954ed28`](ab7b355e-1aee-5681-a777-c6bf7954ed28/) | `ethara/verity-mnist_fine_grained-selftuning-ar9` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`b2e18fe9-c91e-5bd2-8f1d-67900d582bc0`](b2e18fe9-c91e-5bd2-8f1d-67900d582bc0/) | `ethara/verity-cifar-selftuning-ar1` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`b515061d-e187-5f6c-b28b-3c8aac0507bc`](b515061d-e187-5f6c-b28b-3c8aac0507bc/) | `ethara/verity-mnist_fine_grained-selftuning-ar1` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`b5bceb71-0380-5dcc-8665-8e50ab2849b2`](b5bceb71-0380-5dcc-8665-8e50ab2849b2/) | `ethara/verity-mnist_fine_grained-selftuning-ar1` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`b785b44e-dcb4-526d-b286-3d0bee22c28f`](b785b44e-dcb4-526d-b286-3d0bee22c28f/) | `ethara/verity-mnist_fine_grained-selftuning-ar7` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`b80d5e2b-6d36-5c08-98ca-0e365204eadc`](b80d5e2b-6d36-5c08-98ca-0e365204eadc/) | `ethara/verity-mnist_fine_grained-selftuning-ar1` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`bc86a5d0-7dbd-5196-8b4b-70f616684513`](bc86a5d0-7dbd-5196-8b4b-70f616684513/) | `ethara/verity-mnist_fine_grained-selftuning-ar6` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`c2a86c28-7a6d-5455-b462-ae744aec1aec`](c2a86c28-7a6d-5455-b462-ae744aec1aec/) | `ethara/verity-mnist_fine_grained-selftuning-ar9` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`c44186bc-8349-59e9-8706-41098106b5f5`](c44186bc-8349-59e9-8706-41098106b5f5/) | `ethara/verity-cifar-selftuning-ar6` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`cb70623c-50fe-507a-8732-605fd8d6d0eb`](cb70623c-50fe-507a-8732-605fd8d6d0eb/) | `ethara/verity-mnist_fine_grained-selftuning-ar9` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`d308e307-1075-5b79-954b-ee7870dea5a0`](d308e307-1075-5b79-954b-ee7870dea5a0/) | `ethara/verity-cifar-selftuning-ar3` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`d6361f41-c550-5c44-998d-67f92cf0bba3`](d6361f41-c550-5c44-998d-67f92cf0bba3/) | `ethara/verity-mnist_fine_grained-selftuning-ar6` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`dc900317-ebb1-54d7-848f-15493ad88d19`](dc900317-ebb1-54d7-848f-15493ad88d19/) | `ethara/verity-cifar-selftuning-ar1` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`f1314171-6866-5dd3-9917-83576740520f`](f1314171-6866-5dd3-9917-83576740520f/) | `ethara/verity-mnist_fine_grained-selftuning-ar1` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`fbff0f7c-ab3f-5b1d-a179-23edf74fe573`](fbff0f7c-ab3f-5b1d-a179-23edf74fe573/) | `ethara/verity-mnist_fine_grained-selftuning-ar7` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
+| [`fc4fdf5c-418b-5f13-ae89-bb0a4713b323`](fc4fdf5c-418b-5f13-ae89-bb0a4713b323/) | `ethara/verity-cifar-selftuning-ar7` | algoperf, bounded-continuous, conformance, optimization, training-algorithms | unregistered | unsealed | - |
 
-| Property                            | What it closes                                                                                                                                   |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Conjunctive pass over three runs    | A submission tuned to the primary objective still has to hold under both perturbations, against the same submitted bytes                         |
-| Withheld perturbation parameters    | The kinds are disclosed so the target is legible; the parameters are not, so the answer has to generalise rather than anticipate                 |
-| Self-tuning ruleset                 | No hyperparameters are exposed and no search space is shipped, so a tuning sweep is not available as a substitute for an algorithm               |
-| Eighteen compiled conformance rules | Workload identification and model fingerprinting are rejected at the syntax level, so one setting that works everywhere is the conforming answer |
-| Per-step compute red line           | Buying the metric with larger steps crosses a red line instead of paying a penalty                                                               |
-| Sealed agent phase                  | Everything needed is already in the container, so the work is authoring rather than retrieval                                                    |
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#131a33","primaryTextColor":"#e8ecff","primaryBorderColor":"#845EF7","lineColor":"#22d3ee","fontFamily":"monospace"}}}%%
+flowchart LR
+    bundle["&lt;uuid&gt;/"]
+    bundle --> n0["task.toml<br/>runner manifest"]
+    bundle --> n1["instruction.md<br/>objective the agent reads"]
+    bundle --> n2["environment/<br/>agent sandbox image"]
+    bundle --> n3["tests/<br/>verifier, hidden from the agent"]
+    bundle --> n4["solution/<br/>private oracle"]
+```
 
-## [Scoring](#contact)
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#131a33","primaryTextColor":"#e8ecff","primaryBorderColor":"#845EF7","lineColor":"#22d3ee","fontFamily":"monospace"}}}%%
+flowchart LR
+    staging["staging/"]
+    staging --> samples["samples/<br/>30 of 30"]
+    samples --> delivery["delivery/<br/>0 of 10000"]
+    delivery --> stock["stock/<br/>0 of 10000"]
+```
 
-The verifier driver runs nine steps in a fixed order and writes the reward contract path on every code path, including every early exit. A file the agent left behind can never survive, and a zero is always attributable to a named reason rather than to an unwritten file.
+## Verification and quality assurance
 
-The same code serves the graded path and the authoring feasibility pass over frozen logs, so a bundle is checked by the instrument that will grade it. A short step-capped calibration run of the bundle's own seed stub executes on the same device in the same verifier phase and backs the compute-efficiency term alone.
+Each bundle's signed provenance carrier holds its screening roots, screening instant, and absolute expiry. Placement moves that carrier into the private derivation set, which this page never reads, so reconcile lists no root it cannot verify here.
 
-The pass is a conjunction because the upstream rules are disqualifying rather than merely costly, and a weighted blend would let a rule violation be bought back with speed. The reward is continuous because a pass-or-fail signal gives a refinement loop no gradient to climb.
+## Reproduction
 
-## [Execution environment](#contact)
+Each bundle directory is a complete Harbor task: `task.toml` is the runner manifest, `instruction.md` the objective, `environment/` the sandbox image, and `tests/` the verifier. Point a Harbor runner at one bundle directory to reproduce it; `solution/` stays private.
 
-| Property               | Value                                 | Why                                                                                                                                                                                                                                                            |
-| ---------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Agent image            | Pinned by digest                      | Reproducibility of the authoring surface                                                                                                                                                                                                                       |
-| Verifier image         | Named by tag, uniquely per workload   | Harbor sets`skip_tests_upload` for separate-environment mode and expects the image to already own `/tests/test.sh`. A digest would cycle, because writing it changes the bundle bytes, which changes the content-derived UUID, which stales the baked copy |
-| `[environment] gpus` | `0`                                 | Harbor's Docker backend declares no GPU capability and refuses a non-zero request. The device is granted by the orchestrator compose overlay instead.`gpu_types` is documentation                                                                            |
-| Verifier mode          | `separate`, `no-network`          | `[verifier.environment]` is required. Without it Harbor derives the separate verifier baseline from `[environment]`, which is public, and refuses                                                                                                          |
-| Agent network          | Declared`public`, sealed at runtime | The orchestrator seals the agent onto an internal network reaching only the solver proxy. A declared no-network would ask Docker for a post-start network switch it cannot perform, and the trial would refuse to start                                        |
-| Agent timeout          | A backstop, not a budget share        | Derived so the per-attempt ceiling gate holds against the minimum attempt floor. The figure is withheld from`instruction.md`                                                                                                                                 |
+## Cite
 
-The agent image deliberately differs from the graded image. It carries the agent scaffold and the package manager but not the held-out variant classes.
+```bibtex
+@software{verity,
+  title  = {Verity: Adversarial Training-Algorithm Tasks on the AlgoPerf Harness},
+  author = {{Ethara.AI}},
+  year   = {2026},
+  note   = {No measured difficulty results are published at this revision}
+}
+```
 
-The agent phase runs sealed: the solver endpoint is reachable, package indexes and code hosts are not. Everything needed is already in the container, because the pinned harness carries the vendored upstream documentation and the workload class. The verifier phase is closed as well, and its deterministic red line fails closed when the probe record is absent.
+The upstream benchmark must be cited separately and is not superseded by this work. Verity runs a reduced path on different hardware against thresholds that are frequently authored, so no Verity number is an AlgoPerf result.
 
-## [Pins](#contact)
-
-Every bundle pins the same two upstream trees by commit:
-
-| Component | Commit                                       |
-| --------- | -------------------------------------------- |
-| Harness   | `966bbfbcc0b6a33e7af5e670433ab5f4d84ad83a` |
-| Harbor    | `f78dd6854d99ba7cbf9f00649a4e85ce5d99046f` |
-
-The verifier holds a frozen set of pinned packages. An added dependency that re-pins one of them is a red-line crossing.
-
-## [The private boundary](#contact)
-
-The boundary is enforced rather than described. The solution tree, the reference submission, the identity of every pinned perturbation, and the reference evaluation log never appear on the agent-visible surface.
-
-`solution/TRUTH.md` is generated by `solution/recompute.py` from `solution/grounding.yaml` and is never hand-authored. It opens with a canary block of four derived identifiers and then states the ordered path a conforming submission takes through the instruction. Each step names the action, the state it establishes, the mutation or silent drift it must survive, and exactly one checker identifier it satisfies. The named checker set equals the committed checker set by identifier, and the steps close over the deliverable manifest, so a checker set weaker than the instruction is detectable from outside the checkers.
-
-`solution/grounding.yaml` holds only what the bundle cannot reconstruct from itself or from the pinned harness. Workload targets, budgets, metric names, the registry, and optimizer settings are all readable elsewhere and are not copied into it.
-
-`solution/provenance.yaml` and its signature carry the fork ancestry digest, the canonical upstream repository identity, and the atom result digests for the screening and sanitization passes.
-
-## [Reading a bundle](#contact)
-
-This repository carries no runner. A bundle is executed by the orchestrator in the parent repository, which supplies the device overlay and the agent seal.
-
-Read `task.toml` first. No grading behaviour lives only in verifier code, so the manifest and the run specification together state the full contract.
-
-## [Attribution](#contact)
-
-Built on MLCommons AlgoPerf: Training Algorithms, Apache-2.0. No Verity number is an AlgoPerf result and no MLCommons endorsement is implied.
-
-The upstream benchmark must be cited separately and is not superseded by this work.
-
-## [License](#contact)
+## License
 
 MIT. See `LICENSE`.
 
 The vendored upstream harness is Apache-2.0 and its licence and notice travel with it. MLCommons AlgoPerf is named in every delivered artifact, and the Verity name never substitutes for naming it.
 
-## [Contact](#contact)
+## Contact
 
-Organization: Ethara.AI
+Organization: [Ethara.AI](https://github.com/Ethara-Ai)
 
-Security and benchmark-integrity disclosure follows the parent repository's `SECURITY.md`. Do not open a public issue for a contamination finding or a leaked task byte.
+Security and benchmark-integrity disclosure: see `SECURITY.md`. Do not open a public issue for a contamination finding or a leaked task byte.
+
+Contribution route: see `CONTRIBUTING.md`.
