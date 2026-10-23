@@ -1,0 +1,133 @@
+{
+  "id": "54b8e6a5-2b32-437e-8b0a-5eb705d2e333",
+  "task_name": "ethara/verity-mnist_fine_grained-selftuning-ar9",
+  "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__wE8okxm",
+  "trial_uri": "file://./jobs/verity-ep-m11-t17-r0/4ec54b6c-bc0f-5825-b02c-c4ab16aa__wE8okxm",
+  "task_id": {
+    "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8"
+  },
+  "source": null,
+  "task_checksum": "651b0ed3cc6ff85f5117efdcdaeb149123987fe58fbd2c1c1e854568d2828dd7",
+  "config": {
+    "task": {
+      "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8",
+      "git_url": null,
+      "git_commit_id": null,
+      "name": null,
+      "ref": null,
+      "overwrite": false,
+      "download_dir": null,
+      "source": null
+    },
+    "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__wE8okxm",
+    "trials_dir": "./jobs/verity-ep-m11-t17-r0",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "mini-swe-agent",
+      "import_path": null,
+      "model_name": "openai/claude-opus-5",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {},
+      "env": {
+        "OPENAI_API_BASE": "http://host.docker.internal:8003/v1",
+        "OPENAI_BASE_URL": "http://host.docker.internal:8003/v1"
+      },
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "docker",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [
+        "./jobs/docker-compose.host-gateway.yaml",
+        "./jobs/docker-compose.gpu.yaml"
+      ],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [
+      "./injected/turn-17.md"
+    ],
+    "job_id": "b78e0fdd-4009-448e-909a-228d94953abd"
+  },
+  "agent_info": {
+    "name": "mini-swe-agent",
+    "version": "2.4.6",
+    "model_info": {
+      "name": "claude-opus-5",
+      "provider": "openai"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 298,
+    "n_cache_tokens": 0,
+    "n_output_tokens": 684623,
+    "cost_usd": 0.0,
+    "rollout_details": null,
+    "metadata": null
+  },
+  "verifier_result": {
+    "rewards": {
+      "closure": 0.7715856530605066,
+      "compute_efficiency": 0.5487399016130966,
+      "conformance_fraction": 1.0,
+      "per_step_cost_ratio": 1.851988413080562,
+      "perturbations_declared": 2.0,
+      "perturbations_reached": 2.0,
+      "primary_target_reached": 1.0,
+      "qualifying_budget": 14.844006299972534,
+      "red_line_crossed": 0.0,
+      "reward": 0.7715856530605066,
+      "rule_conformance": 1.0,
+      "task_pass": 1.0,
+      "validity": 1.0,
+      "wall_clock_sec": 14.844006299972534,
+      "zero_reason_code": 0.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-09-01T20:11:34.408690Z",
+  "finished_at": "2026-09-01T23:13:17.794626Z",
+  "environment_setup": {
+    "started_at": "2026-09-01T20:11:34.419940Z",
+    "finished_at": "2026-09-01T20:11:35.628160Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-09-01T20:11:35.628211Z",
+    "finished_at": "2026-09-01T20:11:44.720425Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-09-01T20:11:44.720551Z",
+    "finished_at": "2026-09-01T23:10:06.449431Z"
+  },
+  "verifier": {
+    "started_at": "2026-09-01T23:10:19.273561Z",
+    "finished_at": "2026-09-01T23:13:17.794614Z"
+  },
+  "step_results": null
+}

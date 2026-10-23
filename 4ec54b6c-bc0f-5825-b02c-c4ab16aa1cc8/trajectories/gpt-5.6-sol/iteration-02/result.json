@@ -1,0 +1,133 @@
+{
+  "id": "52a08bef-e68a-429a-8efb-9013b211e2f3",
+  "task_name": "ethara/verity-mnist_fine_grained-selftuning-ar9",
+  "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__6XmSefU",
+  "trial_uri": "file://./jobs/verity-ep-m11-codex-20260831T222115Z-t02-r0/4ec54b6c-bc0f-5825-b02c-c4ab16aa__6XmSefU",
+  "task_id": {
+    "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8"
+  },
+  "source": null,
+  "task_checksum": "651b0ed3cc6ff85f5117efdcdaeb149123987fe58fbd2c1c1e854568d2828dd7",
+  "config": {
+    "task": {
+      "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8",
+      "git_url": null,
+      "git_commit_id": null,
+      "name": null,
+      "ref": null,
+      "overwrite": false,
+      "download_dir": null,
+      "source": null
+    },
+    "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__6XmSefU",
+    "trials_dir": "./jobs/verity-ep-m11-codex-20260831T222115Z-t02-r0",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "mini-swe-agent",
+      "import_path": null,
+      "model_name": "openai/gpt-5.6-sol",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {},
+      "env": {
+        "OPENAI_API_BASE": "http://host.docker.internal:8790/v1",
+        "OPENAI_BASE_URL": "http://host.docker.internal:8790/v1"
+      },
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "docker",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [
+        "./jobs/docker-compose.host-gateway.yaml",
+        "./jobs/docker-compose.gpu.yaml"
+      ],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [
+      "./injected/turn-02.md"
+    ],
+    "job_id": "86676cb6-2138-4ea8-b632-5999a5c1406f"
+  },
+  "agent_info": {
+    "name": "mini-swe-agent",
+    "version": "2.4.6",
+    "model_info": {
+      "name": "gpt-5.6-sol",
+      "provider": "openai"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 558413,
+    "n_cache_tokens": 103936,
+    "n_output_tokens": 12915,
+    "cost_usd": 2.1177824,
+    "rollout_details": null,
+    "metadata": null
+  },
+  "verifier_result": {
+    "rewards": {
+      "closure": 0.6386914489108452,
+      "compute_efficiency": 0.8426107442550698,
+      "conformance_fraction": 1.0,
+      "per_step_cost_ratio": 1.1241880381635176,
+      "perturbations_declared": 2.0,
+      "perturbations_reached": 2.0,
+      "primary_target_reached": 1.0,
+      "qualifying_budget": 16.441157341003418,
+      "red_line_crossed": 0.0,
+      "reward": 0.6386914489108452,
+      "rule_conformance": 1.0,
+      "task_pass": 1.0,
+      "validity": 1.0,
+      "wall_clock_sec": 16.441157341003418,
+      "zero_reason_code": 0.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-08-31T22:39:23.372826Z",
+  "finished_at": "2026-08-31T22:51:57.436291Z",
+  "environment_setup": {
+    "started_at": "2026-08-31T22:39:23.383478Z",
+    "finished_at": "2026-08-31T22:39:24.511344Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-08-31T22:39:24.511395Z",
+    "finished_at": "2026-08-31T22:39:35.987342Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-08-31T22:39:35.987452Z",
+    "finished_at": "2026-08-31T22:48:32.414215Z"
+  },
+  "verifier": {
+    "started_at": "2026-08-31T22:48:44.847329Z",
+    "finished_at": "2026-08-31T22:51:57.436278Z"
+  },
+  "step_results": null
+}

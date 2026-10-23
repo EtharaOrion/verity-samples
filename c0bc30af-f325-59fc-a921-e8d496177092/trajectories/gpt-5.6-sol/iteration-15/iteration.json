@@ -1,0 +1,23 @@
+{
+  "candidate_sha256": "61fde4e2c3c4605bf49b0dcf56fec6bbb66a6c82c7854e44e7e6ddc41c532dfe",
+  "conformance_fraction": 1.0,
+  "counts_as_trial": true,
+  "cumulative_tokens": 43335682,
+  "finished_at": "2026-09-06T20:58:38.297805Z",
+  "graded_wall_clock_sec": 74.33450698852539,
+  "index": 15,
+  "input_tokens": 4674936,
+  "model": "gpt-5.6-sol",
+  "outcome": "graded",
+  "output_tokens": 34442,
+  "perturbations_declared": 2.0,
+  "perturbations_reached": 2.0,
+  "red_line_crossed": 0.0,
+  "reward": 0.8578862184303557,
+  "started_at": "2026-09-06T20:22:31.607340Z",
+  "task_pass": 1.0,
+  "trial_dir": "./job/verity-ep-c2-gpt-t15-r0",
+  "turn_index": 15,
+  "wall_s": 2166.690465,
+  "zero_reason_code": 0.0
+}

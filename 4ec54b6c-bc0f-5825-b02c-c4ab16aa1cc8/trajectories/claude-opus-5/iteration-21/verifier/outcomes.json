@@ -1,0 +1,195 @@
+{
+  "checks": [
+    {
+      "id": "C-HARNESS-IMMUTABLE",
+      "locations": [],
+      "passed": true,
+      "reason": "the harness tree is byte-identical to the frozen digest"
+    },
+    {
+      "id": "C-NETWORK-POLICY-HONOURED",
+      "locations": [],
+      "passed": true,
+      "reason": "the probe observed no successful egress under the declared closed policy"
+    },
+    {
+      "id": "C-NO-REWARD-WRITE",
+      "locations": [],
+      "passed": true,
+      "reason": "the reward path did not exist before the verifier wrote it"
+    },
+    {
+      "id": "C-API-SURFACE",
+      "locations": [],
+      "passed": true,
+      "reason": "module level carries only imports, constants, and permitted definitions"
+    },
+    {
+      "id": "C-NO-WORKLOAD-DISPATCH",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-SHAPE-FINGERPRINT",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-SEARCH-SPACE-INVARIANT",
+      "locations": [],
+      "passed": true,
+      "reason": "no search-space file is present, as the self-tuning ruleset requires"
+    },
+    {
+      "id": "C-NO-ENV-MUTATION",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-KERNEL",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-BACKGROUND-WORK",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-CREDENTIAL",
+      "locations": [],
+      "passed": true,
+      "reason": "no credential pattern appears in the submitted tree, literal or statically assembled"
+    },
+    {
+      "id": "C-DEPS-UNCHANGED",
+      "locations": [],
+      "passed": true,
+      "reason": "the submission adds no dependency"
+    },
+    {
+      "id": "C-LOG-WELL-FORMED",
+      "locations": [],
+      "passed": true,
+      "reason": "the log parses, carries the declared metric column, and has a non-decreasing step column"
+    },
+    {
+      "id": "C-TARGET-REACHED",
+      "locations": [],
+      "passed": true,
+      "reason": "row 4 crosses strictly_greater 0.97"
+    },
+    {
+      "id": "C-BUDGET-RESPECTED",
+      "locations": [],
+      "passed": true,
+      "reason": "the qualifying row sits at 24.245661973953247 on the wall_clock_sec axis, at or below the ceiling of 31.1"
+    },
+    {
+      "id": "C-NO-LATCH-CARRYOVER",
+      "locations": [],
+      "passed": true,
+      "reason": "the qualifying row is derived from the metric column and no earlier row carries a set latch"
+    },
+    {
+      "id": "C-PERTURBATION-REACHED",
+      "locations": [],
+      "passed": false,
+      "reason": "1 of 2 declared perturbations reached their own threshold inside their own budget"
+    },
+    {
+      "id": "C-PER-STEP-COST-CEILING",
+      "locations": [],
+      "passed": true,
+      "reason": "per-step cost is 1.220 times the seed anchor, at or below the ceiling of 3.0"
+    },
+    {
+      "id": "C-LOG-WELL-FORMED",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 1 (held_out_variant): the log parses, carries the declared metric column, and has a non-decreasing step column",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-TARGET-REACHED",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 1 (held_out_variant): row 17 crosses strictly_greater 0.97",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-BUDGET-RESPECTED",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": false,
+      "reason": "perturbation slot 1 (held_out_variant): the qualifying row sits at 58.73253273963928 on the wall_clock_sec axis, above the declared ceiling of 45.4",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-NO-LATCH-CARRYOVER",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 1 (held_out_variant): the qualifying row is derived from the metric column and no earlier row carries a set latch",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-LOG-WELL-FORMED",
+      "kind": "ruleset",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 2 (ruleset): the log parses, carries the declared metric column, and has a non-decreasing step column",
+      "slot": 2,
+      "unit_reached": true
+    },
+    {
+      "id": "C-TARGET-REACHED",
+      "kind": "ruleset",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 2 (ruleset): row 3 crosses strictly_greater 0.97",
+      "slot": 2,
+      "unit_reached": true
+    },
+    {
+      "id": "C-BUDGET-RESPECTED",
+      "kind": "ruleset",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 2 (ruleset): the qualifying row sits at 9.084060192108154 on the wall_clock_sec axis, at or below the ceiling of 31.1",
+      "slot": 2,
+      "unit_reached": true
+    },
+    {
+      "id": "C-NO-LATCH-CARRYOVER",
+      "kind": "ruleset",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 2 (ruleset): the qualifying row is derived from the metric column and no earlier row carries a set latch",
+      "slot": 2,
+      "unit_reached": true
+    }
+  ],
+  "notes": [],
+  "steps": [
+    "harness immutability",
+    "environment red lines",
+    "static rule checks",
+    "primary run checks",
+    "perturbation run checks",
+    "per-step cost ceiling",
+    "seed calibration compute efficiency",
+    "primary unit over 3 studies"
+  ]
+}

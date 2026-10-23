@@ -1,0 +1,17 @@
+{
+  "closure": 0.639219155127756,
+  "compute_efficiency": 0.8220421409622617,
+  "conformance_fraction": 1.0,
+  "per_step_cost_ratio": 1.2149017350228752,
+  "perturbations_declared": 2.0,
+  "perturbations_reached": 2.0,
+  "primary_target_reached": 1.0,
+  "qualifying_budget": 17.340810775756836,
+  "red_line_crossed": 0.0,
+  "reward": 0.639219155127756,
+  "rule_conformance": 1.0,
+  "task_pass": 1.0,
+  "validity": 1.0,
+  "wall_clock_sec": 17.340810775756836,
+  "zero_reason_code": 0.0
+}

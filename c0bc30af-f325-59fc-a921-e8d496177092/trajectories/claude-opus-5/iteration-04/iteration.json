@@ -1,0 +1,23 @@
+{
+  "candidate_sha256": "d2c2068c0b889e12bd19bf67d510c441d410fd480b334d63b9cc8edaad3c84c5",
+  "conformance_fraction": 1.0,
+  "counts_as_trial": true,
+  "cumulative_tokens": 9462900,
+  "finished_at": "2026-09-04T06:31:00.860241Z",
+  "graded_wall_clock_sec": 50.034138679504395,
+  "index": 4,
+  "input_tokens": 3061626,
+  "model": "claude-opus-5",
+  "outcome": "graded",
+  "output_tokens": 211412,
+  "perturbations_declared": 2.0,
+  "perturbations_reached": 2.0,
+  "red_line_crossed": 0.0,
+  "reward": 0.8718974477208268,
+  "started_at": "2026-09-04T05:20:18.935098Z",
+  "task_pass": 1.0,
+  "trial_dir": "./job/verity-ep-c2-oh-t04-r0",
+  "turn_index": 4,
+  "wall_s": 4241.925143,
+  "zero_reason_code": 0.0
+}

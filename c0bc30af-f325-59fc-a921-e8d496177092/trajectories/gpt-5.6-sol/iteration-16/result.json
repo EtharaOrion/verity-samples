@@ -1,0 +1,134 @@
+{
+  "id": "28bf4f64-5cc3-4886-bc54-cac14e9938fd",
+  "task_name": "ethara/verity-cifar-selftuning-ar1",
+  "trial_name": "c0bc30af-f325-59fc-a921-e8d49617__zwszcnd",
+  "trial_uri": "file://./ep-c2-gpt/jobs/verity-ep-c2-gpt-t16-r0/c0bc30af-f325-59fc-a921-e8d49617__zwszcnd",
+  "task_id": {
+    "path": "./c0bc30af-f325-59fc-a921-e8d496177092"
+  },
+  "source": null,
+  "task_checksum": "1e706f04802b4d368c8dac3749952884093151af09a864adf0a4af531cd0a8dd",
+  "config": {
+    "task": {
+      "path": "./c0bc30af-f325-59fc-a921-e8d496177092",
+      "git_url": null,
+      "git_commit_id": null,
+      "name": null,
+      "ref": null,
+      "overwrite": false,
+      "download_dir": null,
+      "source": null
+    },
+    "trial_name": "c0bc30af-f325-59fc-a921-e8d49617__zwszcnd",
+    "trials_dir": "./ep-c2-gpt/jobs/verity-ep-c2-gpt-t16-r0",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "openhands-sdk",
+      "import_path": null,
+      "model_name": "openai/gpt-5.6-sol",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {
+        "load_skills": false
+      },
+      "env": {
+        "LLM_BASE_URL": "http://host.docker.internal:8790/v1"
+      },
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "docker",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [
+        "./ep-c2-gpt/jobs/docker-compose.sealed.yaml",
+        "./ep-c2-gpt/jobs/docker-compose.gpu.yaml"
+      ],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [
+      "./ep-c2-gpt/injected/turn-16.md"
+    ],
+    "job_id": "12680310-b411-4061-b257-e56a6e41b9e8"
+  },
+  "agent_info": {
+    "name": "openhands-sdk",
+    "version": "1.11.5",
+    "model_info": {
+      "name": "gpt-5.6-sol",
+      "provider": "openai"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 5102031,
+    "n_cache_tokens": 4781696,
+    "n_output_tokens": 33683,
+    "cost_usd": 3.8676784000000013,
+    "rollout_details": null,
+    "metadata": null
+  },
+  "verifier_result": {
+    "rewards": {
+      "closure": 0.7005169775910185,
+      "compute_efficiency": 0.9805419591071005,
+      "conformance_fraction": 1.0,
+      "per_step_cost_ratio": 0.7054699070239581,
+      "perturbations_declared": 2.0,
+      "perturbations_reached": 2.0,
+      "primary_target_reached": 1.0,
+      "qualifying_budget": 75.28075957298279,
+      "red_line_crossed": 0.0,
+      "reward": 0.7005169775910185,
+      "rule_conformance": 1.0,
+      "task_pass": 1.0,
+      "validity": 1.0,
+      "wall_clock_sec": 75.28075957298279,
+      "zero_reason_code": 0.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-09-06T21:00:18.660021Z",
+  "finished_at": "2026-09-06T21:42:37.274511Z",
+  "environment_setup": {
+    "started_at": "2026-09-06T21:00:18.680382Z",
+    "finished_at": "2026-09-06T21:00:19.877455Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-09-06T21:00:19.877518Z",
+    "finished_at": "2026-09-06T21:00:26.389744Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-09-06T21:00:26.389875Z",
+    "finished_at": "2026-09-06T21:26:07.909629Z"
+  },
+  "verifier": {
+    "started_at": "2026-09-06T21:26:20.282252Z",
+    "finished_at": "2026-09-06T21:42:37.274498Z"
+  },
+  "step_results": null
+}

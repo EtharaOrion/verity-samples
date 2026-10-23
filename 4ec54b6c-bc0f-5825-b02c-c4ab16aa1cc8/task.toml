@@ -1,0 +1,92 @@
+schema_version = "1.4"
+
+# Verity-specific fields live under [metadata], which Harbor models as a free-form mapping. The
+# [environment], [agent], and [verifier] tables carry only Harbor TaskConfig schema fields, so this
+# manifest loads under a strict Harbor loader rather than only under a permissive one.
+#
+# tests/test.sh is discovered by convention and is not declared here.
+
+artifacts = [
+    { source = "/submission/submission.py" },
+    { source = "/logs/runs", exclude = ["**/checkpoint*"] },
+    { source = "/logs/verifier" },
+]
+
+[task]
+name = "ethara/verity-mnist_fine_grained-selftuning-ar9"
+description = "Replace a deliberately weak MNIST handwritten-digit classification training algorithm with one that reaches the declared bar as early in its wall-clock budget as possible, under eighteen compiled upstream conformance rules and two perturbation runs whose parameters are withheld."
+keywords = ["algoperf", "training-algorithms", "optimization", "bounded-continuous", "conformance"]
+authors = [{ name = "Ethara.AI Research", email = "research@ethara.ai" }]
+
+[metadata]
+suite = "verity"
+harness_commit = "966bbfbcc0b6a33e7af5e670433ab5f4d84ad83a"
+harbor_commit = "f78dd6854d99ba7cbf9f00649a4e85ce5d99046f"
+workload = "mnist_fine_grained"
+framework = "pytorch"
+tuning_ruleset = "self"
+graded_axis = "wall_clock_sec"
+threshold_provenance = "workload_class"
+# The refinement loop is declared here, never improvised as a runner flag. `final_selection` names
+# which submission becomes the score; `max_attempts` caps the loop. Both mirror tests/verity_task.json.
+max_attempts = 25
+max_timeout_hours = 3.0
+final_selection = "last"
+refinement_loop = "each iteration solves, submits and is graded; the trajectory is summarised and the next iteration starts from that summary carrying every prior approach and its score"
+tags = ["optimization", "bounded-continuous"]
+attribution = "Built on MLCommons AlgoPerf: Training Algorithms, Apache-2.0. No Verity number is an AlgoPerf result and no MLCommons endorsement is implied."
+
+[metadata.score_schema]
+contract_path = "/logs/verifier/reward.json"
+metrics = ["reward", "task_pass"]
+score_range = [0.0, 1.0]
+score_full_value = 1.0
+score_definition = "mean over graded units of the budget fraction 1 - t/C left unspent at the crossing, priced by rule conformance; 0 if any red line fires or the log is unreadable"
+
+[environment]
+# Pinned by digest, never by tag: the digest is the one recorded in harness.image inside
+# tests/verity_task.json, which the canonical bundle hash covers. The image provisions the substrate
+# and carries no bundle byte, so the digest does not depend on the bundle bytes that name it.
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/algoperf@sha256:0988386c4fb8b3d0a5de3e708a63ddc1057387618e43d341a6d1bd453f29bec5"
+build_timeout_sec = 3600.0
+# ZERO, and the device still reaches the container. Harbor's Docker backend declares no GPU
+# capability, and its environment validation refuses a non-zero request before any container starts,
+# so a bundle asking for 1 here cannot run at all. The device is granted instead by the orchestrator's
+# compose overlay, which is the same seam the host-gateway alias and the sealed network already use.
+# gpu_types stays as the declaration of what the task needs; it is documentation, not a request.
+gpus = 0
+gpu_types = ["H100"]
+memory_mb = 131072
+storage_mb = 16384
+network_mode = "public"
+
+[agent]
+# A backstop against a phase ending mid-edit, not a share of the episode and not a target. The figure
+# is withheld from instruction.md: any bound stated to the agent is one the agent can pace against,
+# which makes an announced backstop a behavioural input rather than a safety limit.
+timeout_sec = 10800.0
+# Public in the manifest, sealed at run time, and the two are not in conflict. Reachable egress does
+# let a solver fetch upstream AlgoPerf material, and this archetype grades precisely the gap between
+# the published form a model recites and the value the pinned code applies. But a declared policy that
+# differs from the [environment] baseline asks Harbor for a post-start network switch the Docker
+# backend cannot perform, so it refuses the trial and the bundle never runs at all. A seal that stops
+# the task from starting protects nothing. The seal is applied to the running container at the network
+# layer instead, without changing the declared policy.
+network_mode = "public"
+
+[verifier]
+timeout_sec = 500.0
+environment_mode = "separate"
+network_mode = "no-network"
+
+# Required, and its absence is why an emitted bundle could not run. Without this table Harbor derives
+# the separate verifier environment's baseline from [environment], which is public, while
+# [verifier].network_mode above is no-network. Those differ, so Harbor asks for the same post-start
+# network switch the Docker backend cannot perform and refuses the trial. Declaring the block makes the
+# verifier environment's own baseline no-network, so nothing has to change after start.
+[verifier.environment]
+docker_image = "426628337772.dkr.ecr.ap-south-1.amazonaws.com/algoperf@sha256:0988386c4fb8b3d0a5de3e708a63ddc1057387618e43d341a6d1bd453f29bec5"
+network_mode = "no-network"
+gpus = 0
+memory_mb = 131072
+storage_mb = 16384

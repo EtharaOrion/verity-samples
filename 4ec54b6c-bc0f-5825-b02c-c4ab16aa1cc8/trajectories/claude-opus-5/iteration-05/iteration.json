@@ -1,0 +1,23 @@
+{
+  "candidate_sha256": "934f04fac06200e52d542abf673f5aca0f450d18281b9ea46376367b513cbad9",
+  "conformance_fraction": 1.0,
+  "counts_as_trial": true,
+  "cumulative_tokens": 976265,
+  "finished_at": "2026-08-31T21:03:21.637617Z",
+  "graded_wall_clock_sec": 13.739784002304077,
+  "index": 5,
+  "input_tokens": 136,
+  "model": "claude-opus-5",
+  "outcome": "graded",
+  "output_tokens": 254316,
+  "perturbations_declared": 2.0,
+  "perturbations_reached": 2.0,
+  "red_line_crossed": 0.0,
+  "reward": 0.8254758711461578,
+  "started_at": "2026-08-31T19:46:16.928363Z",
+  "task_pass": 1.0,
+  "trial_dir": "./job/verity-ep-m11-t05-r0",
+  "turn_index": 5,
+  "wall_s": 4624.709254,
+  "zero_reason_code": 0.0
+}

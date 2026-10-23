@@ -1,0 +1,133 @@
+{
+  "id": "bb91680a-62c6-448d-acc4-9002042abd77",
+  "task_name": "ethara/verity-mnist_fine_grained-selftuning-ar9",
+  "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__3vMSciv",
+  "trial_uri": "file://./jobs/verity-ep-m11-ms-t15-r0/4ec54b6c-bc0f-5825-b02c-c4ab16aa__3vMSciv",
+  "task_id": {
+    "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8"
+  },
+  "source": null,
+  "task_checksum": "e5496d9bcbe99b30e5f1b7e4203e87e7593cb86850402fb088f0e0e27ed9ad37",
+  "config": {
+    "task": {
+      "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8",
+      "git_url": null,
+      "git_commit_id": null,
+      "name": null,
+      "ref": null,
+      "overwrite": false,
+      "download_dir": null,
+      "source": null
+    },
+    "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__3vMSciv",
+    "trials_dir": "./jobs/verity-ep-m11-ms-t15-r0",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "mini-swe-agent",
+      "import_path": null,
+      "model_name": "openai/muse-spark-1.2",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {},
+      "env": {
+        "OPENAI_API_BASE": "http://host.docker.internal:8010/v1",
+        "OPENAI_BASE_URL": "http://host.docker.internal:8010/v1"
+      },
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "docker",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [
+        "./jobs/docker-compose.sealed.yaml",
+        "./jobs/docker-compose.gpu.yaml"
+      ],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [
+      "./injected/turn-15.md"
+    ],
+    "job_id": "280a558a-b01a-4e60-a322-7daa831281d9"
+  },
+  "agent_info": {
+    "name": "mini-swe-agent",
+    "version": "2.4.6",
+    "model_info": {
+      "name": "muse-spark-1.2",
+      "provider": "openai"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 20072565,
+    "n_cache_tokens": 7403377,
+    "n_output_tokens": 134744,
+    "cost_usd": 0.0,
+    "rollout_details": null,
+    "metadata": null
+  },
+  "verifier_result": {
+    "rewards": {
+      "closure": 0.6152769785146533,
+      "compute_efficiency": 0.8228177373543272,
+      "conformance_fraction": 1.0,
+      "per_step_cost_ratio": 1.212349620111854,
+      "perturbations_declared": 2.0,
+      "perturbations_reached": 2.0,
+      "primary_target_reached": 1.0,
+      "qualifying_budget": 23.580950260162354,
+      "red_line_crossed": 0.0,
+      "reward": 0.5273802672982743,
+      "rule_conformance": 0.8571428571428571,
+      "task_pass": 0.0,
+      "validity": 1.0,
+      "wall_clock_sec": 23.580950260162354,
+      "zero_reason_code": 0.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-09-01T19:20:17.982691Z",
+  "finished_at": "2026-09-01T20:38:59.954627Z",
+  "environment_setup": {
+    "started_at": "2026-09-01T19:20:17.994831Z",
+    "finished_at": "2026-09-01T19:20:19.180107Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-09-01T19:20:19.180161Z",
+    "finished_at": "2026-09-01T19:20:19.700826Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-09-01T19:20:19.700940Z",
+    "finished_at": "2026-09-01T20:35:01.744751Z"
+  },
+  "verifier": {
+    "started_at": "2026-09-01T20:35:14.081291Z",
+    "finished_at": "2026-09-01T20:38:59.954614Z"
+  },
+  "step_results": null
+}

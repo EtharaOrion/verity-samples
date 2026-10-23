@@ -1,0 +1,23 @@
+{
+  "candidate_sha256": "eafd5615199b2dbf5a075dce143c25edde4858ebf5c9059a868713fd7a3d5b5b",
+  "conformance_fraction": 1.0,
+  "counts_as_trial": true,
+  "cumulative_tokens": 12048021,
+  "finished_at": "2026-09-01T07:53:46.592569Z",
+  "graded_wall_clock_sec": 24.838913679122925,
+  "index": 15,
+  "input_tokens": 558604,
+  "model": "gpt-5.6-sol",
+  "outcome": "graded",
+  "output_tokens": 8314,
+  "perturbations_declared": 2.0,
+  "perturbations_reached": 2.0,
+  "red_line_crossed": 0.0,
+  "reward": 0.4034125994086854,
+  "started_at": "2026-09-01T07:42:07.778687Z",
+  "task_pass": 1.0,
+  "trial_dir": "./job/verity-ep-m11-codex-20260831T222115Z-t15-r0",
+  "turn_index": 15,
+  "wall_s": 698.813882,
+  "zero_reason_code": 0
+}

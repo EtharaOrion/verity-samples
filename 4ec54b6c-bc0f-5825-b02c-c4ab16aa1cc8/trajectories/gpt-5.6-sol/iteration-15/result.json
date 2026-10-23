@@ -1,0 +1,133 @@
+{
+  "id": "8c3a9e0d-5c06-49db-bc20-05a2559830d5",
+  "task_name": "ethara/verity-mnist_fine_grained-selftuning-ar9",
+  "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__4qRCAEu",
+  "trial_uri": "file://./jobs/verity-ep-m11-codex-20260831T222115Z-t15-r0/4ec54b6c-bc0f-5825-b02c-c4ab16aa__4qRCAEu",
+  "task_id": {
+    "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8"
+  },
+  "source": null,
+  "task_checksum": "651b0ed3cc6ff85f5117efdcdaeb149123987fe58fbd2c1c1e854568d2828dd7",
+  "config": {
+    "task": {
+      "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8",
+      "git_url": null,
+      "git_commit_id": null,
+      "name": null,
+      "ref": null,
+      "overwrite": false,
+      "download_dir": null,
+      "source": null
+    },
+    "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__4qRCAEu",
+    "trials_dir": "./jobs/verity-ep-m11-codex-20260831T222115Z-t15-r0",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "mini-swe-agent",
+      "import_path": null,
+      "model_name": "openai/gpt-5.6-sol",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {},
+      "env": {
+        "OPENAI_API_BASE": "http://host.docker.internal:8790/v1",
+        "OPENAI_BASE_URL": "http://host.docker.internal:8790/v1"
+      },
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "docker",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [
+        "./jobs/docker-compose.host-gateway.yaml",
+        "./jobs/docker-compose.gpu.yaml"
+      ],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [
+      "./injected/turn-15.md"
+    ],
+    "job_id": "3c7a7e67-52d6-416f-b157-79dfa1baee6c"
+  },
+  "agent_info": {
+    "name": "mini-swe-agent",
+    "version": "2.4.6",
+    "model_info": {
+      "name": "gpt-5.6-sol",
+      "provider": "openai"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 558604,
+    "n_cache_tokens": 37376,
+    "n_output_tokens": 8314,
+    "cost_usd": 2.2661424,
+    "rollout_details": null,
+    "metadata": null
+  },
+  "verifier_result": {
+    "rewards": {
+      "closure": 0.4034125994086854,
+      "compute_efficiency": 1.0,
+      "conformance_fraction": 1.0,
+      "per_step_cost_ratio": 1.4144931494169355,
+      "perturbations_declared": 2.0,
+      "perturbations_reached": 2.0,
+      "primary_target_reached": 1.0,
+      "qualifying_budget": 24.838913679122925,
+      "red_line_crossed": 0.0,
+      "reward": 0.4034125994086854,
+      "rule_conformance": 1.0,
+      "task_pass": 1.0,
+      "validity": 1.0,
+      "wall_clock_sec": 24.838913679122925,
+      "zero_reason_code": 0.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-09-01T07:42:10.461807Z",
+  "finished_at": "2026-09-01T07:53:45.984883Z",
+  "environment_setup": {
+    "started_at": "2026-09-01T07:42:10.472562Z",
+    "finished_at": "2026-09-01T07:42:11.726111Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-09-01T07:42:11.726171Z",
+    "finished_at": "2026-09-01T07:42:22.970384Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-09-01T07:42:22.970509Z",
+    "finished_at": "2026-09-01T07:48:46.388938Z"
+  },
+  "verifier": {
+    "started_at": "2026-09-01T07:48:59.286910Z",
+    "finished_at": "2026-09-01T07:53:45.984870Z"
+  },
+  "step_results": null
+}

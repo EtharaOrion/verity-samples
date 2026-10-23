@@ -1,0 +1,195 @@
+{
+  "checks": [
+    {
+      "id": "C-HARNESS-IMMUTABLE",
+      "locations": [],
+      "passed": true,
+      "reason": "the harness tree is byte-identical to the frozen digest"
+    },
+    {
+      "id": "C-NETWORK-POLICY-HONOURED",
+      "locations": [],
+      "passed": true,
+      "reason": "the probe observed no successful egress under the declared closed policy"
+    },
+    {
+      "id": "C-NO-REWARD-WRITE",
+      "locations": [],
+      "passed": true,
+      "reason": "the reward path did not exist before the verifier wrote it"
+    },
+    {
+      "id": "C-API-SURFACE",
+      "locations": [],
+      "passed": true,
+      "reason": "module level carries only imports, constants, and permitted definitions"
+    },
+    {
+      "id": "C-NO-WORKLOAD-DISPATCH",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-SHAPE-FINGERPRINT",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-SEARCH-SPACE-INVARIANT",
+      "locations": [],
+      "passed": true,
+      "reason": "no search-space file is present, as the self-tuning ruleset requires"
+    },
+    {
+      "id": "C-NO-ENV-MUTATION",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-KERNEL",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-BACKGROUND-WORK",
+      "locations": [],
+      "passed": true,
+      "reason": ""
+    },
+    {
+      "id": "C-NO-CREDENTIAL",
+      "locations": [],
+      "passed": true,
+      "reason": "no credential pattern appears in the submitted tree, literal or statically assembled"
+    },
+    {
+      "id": "C-DEPS-UNCHANGED",
+      "locations": [],
+      "passed": true,
+      "reason": "the submission adds no dependency"
+    },
+    {
+      "id": "C-LOG-WELL-FORMED",
+      "locations": [],
+      "passed": true,
+      "reason": "the log parses, carries the declared metric column, and has a non-decreasing step column"
+    },
+    {
+      "id": "C-TARGET-REACHED",
+      "locations": [],
+      "passed": false,
+      "reason": "no evaluation row crosses the threshold in the declared direction"
+    },
+    {
+      "id": "C-BUDGET-RESPECTED",
+      "locations": [],
+      "passed": false,
+      "reason": "no qualifying row, so no budget position exists"
+    },
+    {
+      "id": "C-NO-LATCH-CARRYOVER",
+      "locations": [],
+      "passed": true,
+      "reason": "the verdict is derived from the metric column and no row crosses"
+    },
+    {
+      "id": "C-PERTURBATION-REACHED",
+      "locations": [],
+      "passed": false,
+      "reason": "0 of 2 declared perturbations reached their own threshold inside their own budget"
+    },
+    {
+      "id": "C-PER-STEP-COST-CEILING",
+      "locations": [],
+      "passed": true,
+      "reason": "per-step cost is 0.841 times the seed anchor, at or below the ceiling of 3.0"
+    },
+    {
+      "id": "C-LOG-WELL-FORMED",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 1 (held_out_variant): the log parses, carries the declared metric column, and has a non-decreasing step column",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-TARGET-REACHED",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": false,
+      "reason": "perturbation slot 1 (held_out_variant): no evaluation row crosses the threshold in the declared direction",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-BUDGET-RESPECTED",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": false,
+      "reason": "perturbation slot 1 (held_out_variant): no qualifying row, so no budget position exists",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-NO-LATCH-CARRYOVER",
+      "kind": "held_out_variant",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 1 (held_out_variant): the verdict is derived from the metric column and no row crosses",
+      "slot": 1,
+      "unit_reached": false
+    },
+    {
+      "id": "C-LOG-WELL-FORMED",
+      "kind": "seed",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 2 (seed): the log parses, carries the declared metric column, and has a non-decreasing step column",
+      "slot": 2,
+      "unit_reached": false
+    },
+    {
+      "id": "C-TARGET-REACHED",
+      "kind": "seed",
+      "locations": [],
+      "passed": false,
+      "reason": "perturbation slot 2 (seed): no evaluation row crosses the threshold in the declared direction",
+      "slot": 2,
+      "unit_reached": false
+    },
+    {
+      "id": "C-BUDGET-RESPECTED",
+      "kind": "seed",
+      "locations": [],
+      "passed": false,
+      "reason": "perturbation slot 2 (seed): no qualifying row, so no budget position exists",
+      "slot": 2,
+      "unit_reached": false
+    },
+    {
+      "id": "C-NO-LATCH-CARRYOVER",
+      "kind": "seed",
+      "locations": [],
+      "passed": true,
+      "reason": "perturbation slot 2 (seed): the verdict is derived from the metric column and no row crosses",
+      "slot": 2,
+      "unit_reached": false
+    }
+  ],
+  "notes": [],
+  "steps": [
+    "harness immutability",
+    "environment red lines",
+    "static rule checks",
+    "primary run checks",
+    "perturbation run checks",
+    "per-step cost ceiling",
+    "seed calibration compute efficiency",
+    "primary unit over 2 studies"
+  ]
+}

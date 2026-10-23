@@ -1,0 +1,23 @@
+{
+  "candidate_sha256": "4c969abd8a84a2f93917cdd970149514f3f5bab144f4ff00ecb1d04487ba4a78",
+  "conformance_fraction": 1.0,
+  "counts_as_trial": true,
+  "cumulative_tokens": 206278140,
+  "finished_at": "2026-09-01T19:18:29.221924Z",
+  "graded_wall_clock_sec": 20.984492540359497,
+  "index": 14,
+  "input_tokens": 28797134,
+  "model": "muse-spark-1.2",
+  "outcome": "graded",
+  "output_tokens": 155385,
+  "perturbations_declared": 2.0,
+  "perturbations_reached": 2.0,
+  "red_line_crossed": 0.0,
+  "reward": 0.5700818565089324,
+  "started_at": "2026-09-01T18:10:33.003828Z",
+  "task_pass": 1.0,
+  "trial_dir": "./job/verity-ep-m11-ms-t14-r0",
+  "turn_index": 14,
+  "wall_s": 4076.218096,
+  "zero_reason_code": 0
+}

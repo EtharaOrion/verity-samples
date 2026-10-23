@@ -1,0 +1,256 @@
+{
+  "task_id": "verity-mnist_fine_grained-selftuning-ar9",
+  "schema_version": "1.0",
+  "meta": {
+    "tier": "Baseline",
+    "created_utc": "2026-08-12T00:00:00Z",
+    "notes": "Episode shape: a full run takes 90 seconds against a per-attempt ceiling of 10800 seconds, at 25 attempts and 6 runs per attempt (the primary, two replicate studies of it, two perturbations, and one unstubbed seed-calibration unit that grades nothing)."
+  },
+  "harness": {
+    "submodule_commit": "966bbfbcc0b6a33e7af5e670433ab5f4d84ad83a",
+    "tree_digest": "sha256:274ecb3de2fef51cf8cdad9afe94a75322f4401c974073df74364cb4135c9212",
+    "image": "426628337772.dkr.ecr.ap-south-1.amazonaws.com/algoperf@sha256:0988386c4fb8b3d0a5de3e708a63ddc1057387618e43d341a6d1bd453f29bec5",
+    "docs_digest": "sha256:1f29455e1a5e7c6b3df7cfcbf5bcc0715073cff61a60f17ff0ba623be96fed09",
+    "framework": "pytorch"
+  },
+  "run": {
+    "workload": "mnist_fine_grained",
+    "tuning_ruleset": "self",
+    "rng_seed": 73,
+    "max_global_steps": null,
+    "batch_size_pinned": false,
+    "data_dir": "/data/mnist",
+    "extra_flags": {
+      "save_checkpoints": {
+        "value": false,
+        "reason": "No graded obligation reads a checkpoint and the writes dominate the artifact footprint."
+      },
+      "torch_compile": {
+        "value": true,
+        "reason": "Left at the upstream default so the execution mode matches the upstream path."
+      }
+    },
+    "replicate_seeds": [
+      4242,
+      8821
+    ],
+    "num_tuning_trials": null
+  },
+  "objective": {
+    "metric": "validation/accuracy",
+    "direction": "max",
+    "threshold": 0.97,
+    "threshold_provenance": "workload_class",
+    "budget": {
+      "kind": "wall_clock_sec",
+      "value": 31.1
+    },
+    "anchors": {
+      "seed_metric": 0.85,
+      "anchor_class": "authored"
+    }
+  },
+  "perturbations": [
+    {
+      "id": "held-out-layernorm",
+      "kind": "held_out_variant",
+      "workload": "mnist_layernorm",
+      "metric": "validation/accuracy",
+      "direction": "max",
+      "threshold": 0.97,
+      "threshold_provenance": "workload_class",
+      "budget": {
+        "kind": "wall_clock_sec",
+        "value": 45.4
+      }
+    },
+    {
+      "id": "external-ruleset",
+      "kind": "ruleset",
+      "tuning_ruleset": "external",
+      "num_tuning_trials": 5,
+      "metric": "validation/accuracy",
+      "direction": "max",
+      "threshold": 0.97,
+      "threshold_provenance": "workload_class",
+      "budget": {
+        "kind": "wall_clock_sec",
+        "value": 31.1
+      }
+    }
+  ],
+  "conformance": [
+    {
+      "id": "C-HARNESS-IMMUTABLE",
+      "class": "red_line",
+      "params": {
+        "paths": [
+          "algoperf/",
+          "submission_runner.py"
+        ],
+        "expected_digest_field": "harness.tree_digest"
+      }
+    },
+    {
+      "id": "C-NETWORK-POLICY-HONOURED",
+      "class": "red_line",
+      "params": {
+        "network_mode": "no-network",
+        "verifier_phase": "closed",
+        "negative_control": "NEG-POLICY-DIVERGENCE"
+      }
+    },
+    {
+      "id": "C-PER-STEP-COST-CEILING",
+      "class": "red_line",
+      "params": {
+        "per_step_cost_ceiling_ratio": 3.0,
+        "seed_per_step_cost_sec": 0.002461,
+        "seed_per_step_cost_class": "measured",
+        "negative_control": "NEG-STEP-INFLATION"
+      }
+    },
+    {
+      "id": "C-NO-REWARD-WRITE",
+      "class": "red_line",
+      "params": {
+        "reward_path": "/logs/verifier/reward.json",
+        "negative_control": "NEG-REWARD-PREWRITE",
+        "sentinel_path": "/logs/verifier/.verity_sentinel"
+      }
+    },
+    {
+      "id": "C-NO-CREDENTIAL",
+      "class": "red_line",
+      "params": {}
+    },
+    {
+      "id": "C-DEPS-UNCHANGED",
+      "class": "red_line",
+      "params": {}
+    },
+    {
+      "id": "C-API-SURFACE",
+      "class": "rule",
+      "params": {}
+    },
+    {
+      "id": "C-NO-WORKLOAD-DISPATCH",
+      "class": "rule",
+      "params": {
+        "registry_keys_source": "algoperf/workloads/workloads.py"
+      }
+    },
+    {
+      "id": "C-NO-SHAPE-FINGERPRINT",
+      "class": "rule",
+      "params": {}
+    },
+    {
+      "id": "C-SEARCH-SPACE-INVARIANT",
+      "class": "rule",
+      "params": {
+        "search_space_required": false
+      }
+    },
+    {
+      "id": "C-NO-ENV-MUTATION",
+      "class": "rule",
+      "params": {}
+    },
+    {
+      "id": "C-NO-KERNEL",
+      "class": "rule",
+      "params": {}
+    },
+    {
+      "id": "C-NO-BACKGROUND-WORK",
+      "class": "rule",
+      "params": {}
+    },
+    {
+      "id": "C-LOG-WELL-FORMED",
+      "class": "run",
+      "params": {}
+    },
+    {
+      "id": "C-TARGET-REACHED",
+      "class": "run",
+      "params": {
+        "comparator": "strictly_greater",
+        "comparator_reason": "The workload class compares with a strict greater-than in has_reached_validation_target, so an at-least comparator would grade a different bar than the class this task reuses."
+      }
+    },
+    {
+      "id": "C-BUDGET-RESPECTED",
+      "class": "run",
+      "params": {}
+    },
+    {
+      "id": "C-PERTURBATION-REACHED",
+      "class": "run",
+      "params": {
+        "comparator": "strictly_greater"
+      }
+    },
+    {
+      "id": "C-NO-LATCH-CARRYOVER",
+      "class": "run",
+      "params": {
+        "latch_columns": [
+          "validation/target_reached"
+        ]
+      }
+    }
+  ],
+  "submission_surface": {
+    "required_functions": [
+      "get_batch_size",
+      "init_optimizer_state",
+      "update_params",
+      "data_selection"
+    ],
+    "search_space_required": false,
+    "allow_requirements_txt": false,
+    "writable_paths": [
+      "/submission"
+    ]
+  },
+  "refinement": {
+    "max_attempts": 25,
+    "attempt_budget": {
+      "kind": "wall_clock_sec",
+      "value": 31.1
+    },
+    "wall_clock_ceiling_sec": 10800,
+    "history_policy": "summary",
+    "final_selection": "last",
+    "attempt_token_count": true
+  },
+  "upstream_provenance": {
+    "origin": "derived",
+    "provenance_date": "2026-02-07",
+    "upstream": {
+      "identity": "MLCommons AlgoPerf Training Algorithms",
+      "version": "1.0.0",
+      "license": "Apache-2.0",
+      "modifications": [
+        "Reduced execution path. The mnist_fine_grained workload is pinned.",
+        "Self-tuning ruleset pinned as the primary.",
+        "Budget axis retained but re-anchored. The graded axis is accumulated submission time in seconds, as upstream measures it, read against the budget the runner enforces for the declared ruleset rather than against the upstream time-to-result normalisation.",
+        "Score replaced. A bounded continuous scalar with a conjunctive task-pass predicate replaces the upstream performance-profile integral.",
+        "Scoring path replaced. The verifier parses eval_measurements.csv directly and never calls scoring/score_submissions.py, which does not execute under the harness's own pinned NumPy floor.",
+        "Conformance rules compiled. Upstream prose rules are compiled into eighteen deterministic checks over the submitted bytes and the recorded log.",
+        "Perturbation set added. Two graded conjuncts with no upstream counterpart.",
+        "Per-step cost ceiling added. The upstream benchmark states no ratio bound on per-step compute."
+      ]
+    },
+    "source": {
+      "source_kind": "public_repository",
+      "canonical_identity": "github.com/mlcommons/algorithmic-efficiency",
+      "fork_ancestry_digest": "sha256:2ca7b22e7581615a22ce6638b0f5b402a33e38cb730fc91c0f1c07f7c36b865d",
+      "base_commit_sha": "966bbfbcc0b6a33e7af5e670433ab5f4d84ad83a",
+      "task_generating_event_timestamp": "2026-04-03T02:25:13Z"
+    }
+  }
+}

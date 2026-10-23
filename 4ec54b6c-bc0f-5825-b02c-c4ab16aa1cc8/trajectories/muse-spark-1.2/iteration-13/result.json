@@ -1,0 +1,133 @@
+{
+  "id": "9c0fa87c-701a-4131-9f31-98f20d65f885",
+  "task_name": "ethara/verity-mnist_fine_grained-selftuning-ar9",
+  "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__YaRYshR",
+  "trial_uri": "file://./jobs/verity-ep-m11-ms-t13-r0/4ec54b6c-bc0f-5825-b02c-c4ab16aa__YaRYshR",
+  "task_id": {
+    "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8"
+  },
+  "source": null,
+  "task_checksum": "e5496d9bcbe99b30e5f1b7e4203e87e7593cb86850402fb088f0e0e27ed9ad37",
+  "config": {
+    "task": {
+      "path": "./4ec54b6c-bc0f-5825-b02c-c4ab16aa1cc8",
+      "git_url": null,
+      "git_commit_id": null,
+      "name": null,
+      "ref": null,
+      "overwrite": false,
+      "download_dir": null,
+      "source": null
+    },
+    "trial_name": "4ec54b6c-bc0f-5825-b02c-c4ab16aa__YaRYshR",
+    "trials_dir": "./jobs/verity-ep-m11-ms-t13-r0",
+    "timeout_multiplier": 1.0,
+    "agent_timeout_multiplier": null,
+    "verifier_timeout_multiplier": null,
+    "agent_setup_timeout_multiplier": null,
+    "environment_build_timeout_multiplier": null,
+    "agent": {
+      "name": "mini-swe-agent",
+      "import_path": null,
+      "model_name": "openai/muse-spark-1.2",
+      "skills": [],
+      "override_timeout_sec": null,
+      "override_setup_timeout_sec": null,
+      "max_timeout_sec": null,
+      "extra_allowed_hosts": [],
+      "kwargs": {},
+      "env": {
+        "OPENAI_API_BASE": "http://host.docker.internal:8010/v1",
+        "OPENAI_BASE_URL": "http://host.docker.internal:8010/v1"
+      },
+      "mcp_servers": []
+    },
+    "environment": {
+      "type": "docker",
+      "import_path": null,
+      "force_build": false,
+      "delete": true,
+      "cpu_enforcement_policy": "auto",
+      "memory_enforcement_policy": "auto",
+      "override_cpus": null,
+      "override_memory_mb": null,
+      "override_storage_mb": null,
+      "override_gpus": null,
+      "override_tpu": null,
+      "mounts": null,
+      "extra_docker_compose": [
+        "./jobs/docker-compose.sealed.yaml",
+        "./jobs/docker-compose.gpu.yaml"
+      ],
+      "env": {},
+      "kwargs": {},
+      "extra_allowed_hosts": []
+    },
+    "verifier": {
+      "override_timeout_sec": null,
+      "max_timeout_sec": null,
+      "env": {},
+      "disable": false
+    },
+    "artifacts": [],
+    "extra_instruction_paths": [
+      "./injected/turn-13.md"
+    ],
+    "job_id": "aefa64ee-cbf5-428d-aaab-be81c75d3494"
+  },
+  "agent_info": {
+    "name": "mini-swe-agent",
+    "version": "2.4.6",
+    "model_info": {
+      "name": "muse-spark-1.2",
+      "provider": "openai"
+    }
+  },
+  "agent_result": {
+    "n_input_tokens": 9436690,
+    "n_cache_tokens": 6164894,
+    "n_output_tokens": 86152,
+    "cost_usd": 0.0,
+    "rollout_details": null,
+    "metadata": null
+  },
+  "verifier_result": {
+    "rewards": {
+      "closure": 0.5830418363297315,
+      "compute_efficiency": 0.6164671076939818,
+      "conformance_fraction": 1.0,
+      "per_step_cost_ratio": 1.6313168583733135,
+      "perturbations_declared": 2.0,
+      "perturbations_reached": 2.0,
+      "primary_target_reached": 1.0,
+      "qualifying_budget": 23.701794385910034,
+      "red_line_crossed": 0.0,
+      "reward": 0.5830418363297315,
+      "rule_conformance": 1.0,
+      "task_pass": 1.0,
+      "validity": 1.0,
+      "wall_clock_sec": 23.701794385910034,
+      "zero_reason_code": 0.0
+    }
+  },
+  "exception_info": null,
+  "started_at": "2026-09-01T17:38:23.289368Z",
+  "finished_at": "2026-09-01T18:08:54.405383Z",
+  "environment_setup": {
+    "started_at": "2026-09-01T17:38:23.301048Z",
+    "finished_at": "2026-09-01T17:38:24.500063Z"
+  },
+  "agent_setup": {
+    "started_at": "2026-09-01T17:38:24.500116Z",
+    "finished_at": "2026-09-01T17:38:25.026710Z"
+  },
+  "agent_execution": {
+    "started_at": "2026-09-01T17:38:25.026821Z",
+    "finished_at": "2026-09-01T18:04:50.406598Z"
+  },
+  "verifier": {
+    "started_at": "2026-09-01T18:05:02.782241Z",
+    "finished_at": "2026-09-01T18:08:54.405370Z"
+  },
+  "step_results": null
+}
