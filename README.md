@@ -112,3 +112,9 @@ Organization: [Ethara.AI](https://github.com/Ethara-Ai)
 Security and benchmark-integrity disclosure: see `SECURITY.md`. Do not open a public issue for a contamination finding or a leaked task byte.
 
 Contribution route: see `CONTRIBUTING.md`.
+
+---
+
+## Copyright
+
+Copyright (c) 2026 Green Rider Technology LLP (Ethara AI). All rights reserved.
